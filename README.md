@@ -1,3 +1,9 @@
+# Diffs with [Fork Origin (t3chn0m4g3)](https://github.com/t3chn0m4g3/t-pot-attack-map)
+- externalized the port / color mapping into the [port_config.json](config/port_config.json) file.
+- replaced all the ports in the HTML / CSS with my own.
+
+Note: an automated way to update the CSS / HTML needs to be done when we add a new port.
+
 # T-Pot Attack Map
 
 This fork of the GeoIP Attack Map was adjusted for [T-Pot](https://github.com/telekom-security/tpotce), also introducing new features (i.e. dynamic destination IPs to represent T-Pots), better performance for the Attack Map Server by using aiohttp, asyncio and aioredis and, where possible, serving the dependencies locally instead from different CDNs.
