@@ -33,6 +33,8 @@ with open('./config/port_config.json') as f:
 service_rgb = {name: info['color'] for name, info in services.items()}
 PORT_MAP = {port: name for name, info in services.items() for port in info['ports']}
 
+print(f"service rgb: " + str(service_rgb))
+print(f"Port map: " + str(service_rgb))
 def connect_redis(redis_ip):
     global redis_client
     try:

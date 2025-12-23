@@ -1730,56 +1730,13 @@ select:focus {
     color: #000;
 }
 
-.protocol-chargen { background-color: #4CAF50; }
-.protocol-ftp-data { background-color: #F44336; }
-.protocol-ftp { background-color: #FF5722; }
-.protocol-ssh { background-color: #FF9800; }
-.protocol-telnet { background-color: #FFC107; }
-.protocol-smtp { background-color: #8BC34A; }
-.protocol-wins { background-color: #009688; }
-.protocol-dns { background-color: #00BCD4; }
-.protocol-dhcp { background-color: #03A9F4; }
-.protocol-tftp { background-color: #2196F3; }
-.protocol-http { background-color: #3F51B5; }
-.protocol-dicom { background-color: #9C27B0; }
-.protocol-pop3 { background-color: #E91E63; }
-.protocol-ntp { background-color: #795548; }
-.protocol-rpc { background-color: #607D8B; }
-.protocol-imap { background-color: #9E9E9E; }
-.protocol-snmp { background-color: #FF6B35; }
-.protocol-ldap { background-color: #FF8E53; }
-.protocol-https { background-color: #0080FF; }
-.protocol-smb { background-color: #BF00FF; }
-.protocol-smtps { background-color: #80FF00; }
-.protocol-email { background-color: #00FF80; }
-.protocol-ipmi { background-color: #00FFFF; }
-.protocol-ipp { background-color: #8000FF; }
-.protocol-imaps { background-color: #FF0080; }
-.protocol-pop3s { background-color: #80FF80; }
-.protocol-nfs { background-color: #FF8080; }
-.protocol-socks { background-color: #8080FF; }
-.protocol-sql { background-color: #00FF00; }
-.protocol-oracle { background-color: #FFFF00; }
-.protocol-pptp { background-color: #FF00FF; }
-.protocol-mqtt { background-color: #00FF40; }
-.protocol-ssdp { background-color: #40FF00; }
-.protocol-iec104 { background-color: #FF4000; }
-.protocol-hl7 { background-color: #4000FF; }
-.protocol-mysql { background-color: #00FF00; }
-.protocol-rdp { background-color: #FF0060; }
-.protocol-ipsec { background-color: #60FF00; }
-.protocol-sip { background-color: #FFCCFF; }
-.protocol-postgresql { background-color: #00CCFF; }
-.protocol-adb { background-color: #FFCCCC; }
-.protocol-vnc { background-color: #0000FF; color: #fff; }
-.protocol-redis { background-color: #CC00FF; }
-.protocol-irc { background-color: #FFCC00; }
-.protocol-jetdirect { background-color: #8000FF; }
-.protocol-elasticsearch { background-color: #FF8000; }
-.protocol-industrial { background-color: #80FF40; }
-.protocol-memcached { background-color: #40FF80; }
-.protocol-mongodb { background-color: #FF4080; }
-.protocol-scada { background-color: #8040FF; }
+.protocol-ivanti_cs { background-color: #FF6B6B; }
+.protocol-citrix { background-color: #4ECDC4; }
+.protocol-ivanti_epm { background-color: #45B7D1; }
+.protocol-sap_netweaver { background-color: #FFA07A; }
+.protocol-jenkins { background-color: #98D8C8; }
+.protocol-solarwinds_whd { background-color: #F7DC6F; }
+.protocol-moveit { background-color: #BB8FCE; }
 .protocol-other { background-color: #78909C; color: #fff; }
 
 /* Flag Icons */

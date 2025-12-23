@@ -593,56 +593,13 @@ Cache Statistics:
     }
     getProtocolColor(protocol, port = null) {
         const colors = {
-            'CHARGEN': '#4CAF50',
-            'FTP-DATA': '#F44336',
-            'FTP': '#FF5722',
-            'SSH': '#FF9800',
-            'TELNET': '#FFC107',
-            'SMTP': '#8BC34A',
-            'WINS': '#009688',
-            'DNS': '#00BCD4',
-            'DHCP': '#03A9F4',
-            'TFTP': '#2196F3',
-            'HTTP': '#3F51B5',
-            'DICOM': '#9C27B0',
-            'POP3': '#E91E63',
-            'NTP': '#795548',
-            'RPC': '#607D8B',
-            'IMAP': '#9E9E9E',
-            'SNMP': '#FF6B35',
-            'LDAP': '#FF8E53',
-            'HTTPS': '#0080FF',
-            'SMB': '#BF00FF',
-            'SMTPS': '#80FF00',
-            'EMAIL': '#00FF80',
-            'IPMI': '#00FFFF',
-            'IPP': '#8000FF',
-            'IMAPS': '#FF0080',
-            'POP3S': '#80FF80',
-            'NFS': '#FF8080',
-            'SOCKS': '#8080FF',
-            'SQL': '#00FF00',
-            'ORACLE': '#FFFF00',
-            'PPTP': '#FF00FF',
-            'MQTT': '#00FF40',
-            'SSDP': '#40FF00',
-            'IEC104': '#FF4000',
-            'HL7': '#4000FF',
-            'MYSQL': '#00FF00',
-            'RDP': '#FF0060',
-            'IPSEC': '#60FF00',
-            'SIP': '#FFCCFF',
-            'POSTGRESQL': '#00CCFF',
-            'ADB': '#FFCCCC',
-            'VNC': '#0000FF',
-            'REDIS': '#CC00FF',
-            'IRC': '#FFCC00',
-            'JETDIRECT': '#8000FF',
-            'ELASTICSEARCH': '#FF8000',
-            'INDUSTRIAL': '#80FF40',
-            'MEMCACHED': '#40FF80',
-            'MONGODB': '#FF4080',
-            'SCADA': '#8040FF',
+            'IVANTI_CS': '#FF6B6B',
+            'CITRIX': '#4ECDC4',
+            'IVANTI_EPM': '#45B7D1',
+            'SAP_NETWEAVER': '#FFA07A',
+            'JENKINS': '#98D8C8',
+            'SOLARWINDS_WHD': '#F7DC6F',
+            'MOVEIT': '#BB8FCE',
             'OTHER': '#78909C'
         };
         
@@ -668,12 +625,8 @@ Cache Statistics:
         
         // List of known protocols to check against
         const knownProtocols = [
-            'CHARGEN', 'FTP-DATA', 'FTP', 'SSH', 'TELNET', 'SMTP', 'WINS', 'DNS', 'DHCP', 'TFTP',
-            'HTTP', 'DICOM', 'POP3', 'NTP', 'RPC', 'IMAP', 'SNMP', 'LDAP', 'HTTPS', 'SMB',
-            'SMTPS', 'EMAIL', 'IPMI', 'IPP', 'IMAPS', 'POP3S', 'NFS', 'SOCKS', 'SQL', 'ORACLE',
-            'PPTP', 'MQTT', 'SSDP', 'IEC104', 'HL7', 'MYSQL', 'RDP', 'IPSEC', 'SIP', 'POSTGRESQL',
-            'ADB', 'VNC', 'REDIS', 'IRC', 'JETDIRECT', 'ELASTICSEARCH', 'INDUSTRIAL', 'MEMCACHED',
-            'MONGODB', 'SCADA'
+            'IVANTI_CS', 'CITRIX', 'IVANTI_EPM', 'SAP_NETWEAVER', 'JENKINS', 
+            'SOLARWINDS_WHD', 'MOVEIT'
         ];
         
         const protocolUpper = protocol.toUpperCase();
