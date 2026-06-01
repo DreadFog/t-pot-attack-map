@@ -1695,7 +1695,7 @@ select:focus {
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
-    color: #000;
+    /* Color is now dynamically applied by service-config.js based on JSON config */
 }
 
 /* Flag Icons */

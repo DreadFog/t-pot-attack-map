@@ -108,16 +108,18 @@
     function getContrastTextColor(hexColor) {
         const hex = String(hexColor || '').replace('#', '').trim();
         if (!/^[0-9A-Fa-f]{6}$/.test(hex)) {
-            return '#000';
+            return '#fff';
         }
 
         const r = parseInt(hex.slice(0, 2), 16);
         const g = parseInt(hex.slice(2, 4), 16);
         const b = parseInt(hex.slice(4, 6), 16);
 
-        // WCAG relative luminance approximation for quick readable text color.
+        // WCAG relative luminance formula for text contrast
+        // Normalized: (0.299*R + 0.587*G + 0.114*B) / 255
+        // Use threshold of 0.5 for better readability of bright colors
         const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-        return luminance > 0.6 ? '#000' : '#fff';
+        return luminance > 0.5 ? '#000' : '#fff';
     }
 
     function ensureProtocolStyles() {
