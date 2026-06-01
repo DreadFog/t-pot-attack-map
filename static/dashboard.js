@@ -2747,7 +2747,7 @@ Cache Statistics:
             if (header) {
                 const text = header.textContent;
                 if ((cardType === 'attack-distribution' && text.includes('Attack Distribution')) ||
-                    (cardType === 'protocol-breakdown' && text.includes('Protocol Breakdown'))) {
+                    (cardType === 'protocol-breakdown' && text.includes('Solution Breakdown'))) {
                     
                     // Remove existing retention info
                     let retentionSpan = card.querySelector('.data-retention-info');

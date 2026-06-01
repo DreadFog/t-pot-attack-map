@@ -2,6 +2,7 @@ import datetime
 import json
 import time
 import os
+from collections import deque
 import pytz
 import redis
 from elasticsearch import Elasticsearch
@@ -97,6 +98,9 @@ def get_honeypot_stats(timedelta):
 def update_honeypot_data():
     global was_disconnected_es, was_disconnected_redis
     processed_data = []
+    recent_event_ids = set()
+    recent_event_order = deque()
+    max_recent_event_ids = 20000
     last = {"1m", "1h", "24h"}
     mydelta = 10
     # Using timezone-aware UTC datetime (Python 3.14+ requirement)
@@ -144,7 +148,7 @@ def update_honeypot_data():
                     {
                         "range": {
                             "@timestamp": {
-                                "gte": mylast[0] + "T" + mylast[1],
+                                "gt": mylast[0] + "T" + mylast[1],
                                 "lte": mynow[0] + "T" + mynow[1]
                             }
                         }
@@ -154,14 +158,27 @@ def update_honeypot_data():
         }
 
         res = es.search(index="logstash-*", size=100, query=ES_query)
+        # Move the polling cursor forward every iteration to avoid overlapping windows.
+        # Combined with per-hit _id dedup this prevents duplicate publish storms.
+        time_last_request = mynow_dt.replace(tzinfo=datetime.UTC)
         hits = res['hits']
         if len(hits['hits']) != 0:
-            time_last_request = datetime.datetime.now(datetime.UTC) - datetime.timedelta(seconds=mydelta)
             for hit in hits['hits']:
                 try:
+                    hit_id = hit.get("_id")
+                    if hit_id and hit_id in recent_event_ids:
+                        continue
+
                     process_datas = process_data(hit)
                     if process_datas != None:
                         processed_data.append(process_datas)
+
+                    if hit_id:
+                        recent_event_ids.add(hit_id)
+                        recent_event_order.append(hit_id)
+                        while len(recent_event_order) > max_recent_event_ids:
+                            expired = recent_event_order.popleft()
+                            recent_event_ids.discard(expired)
                 except Exception:
                     pass
         if len(processed_data) != 0:

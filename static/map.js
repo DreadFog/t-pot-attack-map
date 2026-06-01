@@ -855,12 +855,12 @@ function createAttackerPopup(attackerData) {
         
         content.appendChild(createInfoRow('Total Attacks:', ipData.attacks.length));
         
-        // Protocol Badge
+        // Solution Badge
         const protoRow = document.createElement('div');
         protoRow.className = 'info-row';
         const protoLabel = document.createElement('span');
         protoLabel.className = 'info-label';
-        protoLabel.textContent = 'Top Protocol:';
+        protoLabel.textContent = 'Top Solution:';
         const protoBadge = document.createElement('span');
         protoBadge.className = `protocol-badge ${getProtocolClass(topProtocol)}`;
         protoBadge.textContent = topProtocol;
@@ -886,12 +886,12 @@ function createAttackerPopup(attackerData) {
         content.appendChild(createInfoRow('Total IPs:', ips.length));
         content.appendChild(createInfoRow('Total Attacks:', totalAttacks));
         
-        // Protocol Badge
+        // Solution Badge
         const protoRow = document.createElement('div');
         protoRow.className = 'info-row';
         const protoLabel = document.createElement('span');
         protoLabel.className = 'info-label';
-        protoLabel.textContent = 'Top Protocol:';
+        protoLabel.textContent = 'Top Solution:';
         const protoBadge = document.createElement('span');
         protoBadge.className = `protocol-badge ${getProtocolClass(topProtocol)}`;
         protoBadge.textContent = topProtocol;
@@ -940,7 +940,7 @@ function createHoneypotPopup(honeypotData) {
     const now = new Date();
     const lastUpdateAgo = formatTimeAgo(honeypotData.lastUpdate);
     
-    // Get top 3 protocols
+    // Get top 3 solutions
     const sortedProtocols = Object.entries(honeypotData.protocolStats)
         .sort(([,a], [,b]) => b - a)
         .slice(0, 3);
@@ -1005,7 +1005,7 @@ function createHoneypotPopup(honeypotData) {
         section.className = 'info-section';
         const sectionLabel = document.createElement('span');
         sectionLabel.className = 'section-label';
-        sectionLabel.textContent = 'Top Protocols:';
+        sectionLabel.textContent = 'Top Solutions:';
         section.appendChild(sectionLabel);
         
         sortedProtocols.forEach(([protocol, count]) => {
