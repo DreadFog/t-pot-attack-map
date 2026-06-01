@@ -1064,38 +1064,6 @@ body {
     animation: newRowGlow 2s ease-out;
 }
 
-/* Protocol badge styling for live feed */
-.protocol-ftp { background: #FF5722; color: white; }
-.protocol-ssh { background: #FF9800; color: white; }
-.protocol-telnet { background: #FFC107; color: black; }
-.protocol-email { background: #00FF80; color: black; }
-.protocol-smtp { background: #8BC34A; color: black; }
-.protocol-sql { background: #00FF00; color: black; }
-.protocol-dns { background: #00BCD4; color: black; }
-.protocol-http { background: #3F51B5; color: white; }
-.protocol-https { background: #0080FF; color: white; }
-.protocol-vnc { background: #0000FF; color: white; }
-.protocol-snmp { background: #FF6B35; color: white; }
-.protocol-smb { background: #BF00FF; color: white; }
-.protocol-medical { background: #ff00ff; color: white; }
-.protocol-rdp { background: #FF0060; color: white; }
-.protocol-sip { background: #FFCCFF; color: black; }
-.protocol-adb { background: #FFCCCC; color: black; }
-
-/* Generic/fallback */
-.protocol-other { background: #78909C; color: white; }
-
-/* Theme-specific protocol-other styling for better contrast */
-[data-theme="light"] .protocol-other {
-    background: #78909C;
-    color: white;
-}
-
-[data-theme="dark"] .protocol-other {
-    background: #78909C;
-    color: white;
-}
-
 /* Time column formatting */
 #live-attacks-table .time-cell {
     white-space: nowrap;
@@ -1729,15 +1697,6 @@ select:focus {
     text-transform: uppercase;
     color: #000;
 }
-
-.protocol-ivanti_cs { background-color: #FF6B6B; }
-.protocol-citrix { background-color: #4ECDC4; }
-.protocol-ivanti_epm { background-color: #45B7D1; }
-.protocol-sap_netweaver { background-color: #FFA07A; }
-.protocol-jenkins { background-color: #98D8C8; }
-.protocol-solarwinds_whd { background-color: #F7DC6F; }
-.protocol-moveit { background-color: #BB8FCE; }
-.protocol-other { background-color: #78909C; color: #fff; }
 
 /* Flag Icons */
 .flag-icon {

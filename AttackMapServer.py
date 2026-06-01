@@ -106,6 +106,7 @@ async def make_webapp():
         web.get('/', my_index_handler),
         web.get('/websocket', my_websocket_handler),
         web.static('/static/', 'static'),
+        web.static('/config/', 'config'),
         web.static('/images/', 'static/images'),
         web.static('/flags/', 'static/flags')
     ])

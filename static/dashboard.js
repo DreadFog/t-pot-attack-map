@@ -299,6 +299,7 @@ class AttackCache {
 class AttackMapDashboard {
     constructor() {
         this.charts = {};
+        this.serviceConfig = window.TPotServiceConfig || null;
         this.theme = localStorage.getItem('theme') || 'dark';
         this.panelCollapsed = localStorage.getItem('sidePanelCollapsed') === 'true' || false;
         this.bottomPanelHeight = parseInt(localStorage.getItem('bottomPanelHeight')) || 350;
@@ -330,6 +331,16 @@ class AttackMapDashboard {
     }
 
     async init() {
+        if (window.tpotServiceConfigReady) {
+            await window.tpotServiceConfigReady;
+            this.serviceConfig = window.TPotServiceConfig || this.serviceConfig;
+        }
+
+        if (this.serviceConfig) {
+            this.serviceConfig.ensureProtocolStyles();
+            this.serviceConfig.renderServiceLegend('#service-legend');
+        }
+
         this.initTheme();
         this.initEventListeners();
         this.initCharts();
@@ -592,51 +603,41 @@ Cache Statistics:
         }
     }
     getProtocolColor(protocol, port = null) {
-        const colors = {
-            'IVANTI_CS': '#FF6B6B',
-            'CITRIX': '#4ECDC4',
-            'IVANTI_EPM': '#45B7D1',
-            'SAP_NETWEAVER': '#FFA07A',
-            'JENKINS': '#98D8C8',
-            'SOLARWINDS_WHD': '#F7DC6F',
-            'MOVEIT': '#BB8FCE',
-            'OTHER': '#78909C'
-        };
-        
-        const protocolUpper = protocol?.toUpperCase();
-        
-        // Return predefined color for known protocols
-        if (colors[protocolUpper]) {
-            return colors[protocolUpper];
+        if (this.serviceConfig) {
+            return this.serviceConfig.getProtocolColor(protocol);
         }
-        
-        // Fallback for unknown protocols - should use OTHER color for consistency
-        return colors['OTHER'];  // Use OTHER color (#78909C) for unknown protocols
+
+        return '#78909C';
     }
 
     // Normalize protocol names to known protocols or "OTHER"
     normalizeProtocol(protocol) {
-        if (!protocol) return 'OTHER';
-        
-        // Check if protocol is a numeric string (port number) - convert to OTHER
-        if (/^\d+$/.test(protocol.toString())) {
+        if (this.serviceConfig) {
+            return this.serviceConfig.normalizeProtocol(protocol);
+        }
+
+        if (!protocol) {
             return 'OTHER';
         }
-        
-        // List of known protocols to check against
-        const knownProtocols = [
-            'IVANTI_CS', 'CITRIX', 'IVANTI_EPM', 'SAP_NETWEAVER', 'JENKINS', 
-            'SOLARWINDS_WHD', 'MOVEIT'
-        ];
-        
-        const protocolUpper = protocol.toUpperCase();
-        
-        // If protocol is not in the known list, use "OTHER"
-        if (!knownProtocols.includes(protocolUpper)) {
+
+        const protocolUpper = String(protocol).toUpperCase();
+        if (/^\d+$/.test(protocolUpper)) {
             return 'OTHER';
         }
-        
+
         return protocolUpper;
+    }
+
+    getProtocolClass(protocol) {
+        if (this.serviceConfig) {
+            return this.serviceConfig.getProtocolClass(protocol);
+        }
+
+        const normalized = this.normalizeProtocol(protocol)
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '_')
+            .replace(/^_+|_+$/g, '');
+        return `protocol-${normalized || 'other'}`;
     }
 
     // Initialize timeline data structure for different intervals
@@ -1375,9 +1376,11 @@ Cache Statistics:
         const ctx = document.getElementById('protocol-chart');
         if (!ctx) return;
 
-        const labels = ['SSH', 'HTTP', 'FTP', 'TELNET', 'DNS', 'SMTP'];
+        const labels = this.serviceConfig
+            ? this.serviceConfig.getKnownProtocols({ includeOther: true })
+            : ['OTHER'];
         const colors = labels.map(protocol => this.getProtocolColor(protocol));
-        const initialData = [45, 35, 20, 15, 10, 8];
+        const initialData = new Array(labels.length).fill(0);
 
         this.charts.protocol = new Chart(ctx, {
             type: 'bar',
@@ -3059,9 +3062,7 @@ Cache Statistics:
         
         // Determine protocol - use "OTHER" if not specified or unknown
         const protocolName = this.normalizeProtocol(event.protocol);
-        
-        const protocol = protocolName.toLowerCase();
-        const protocolClass = `protocol-${protocol}`;
+        const protocolClass = this.getProtocolClass(protocolName);
         
         // Create cells using DOM API to prevent XSS
         const addCell = (className, text) => {
@@ -3253,8 +3254,7 @@ Cache Statistics:
             const flagCode = ipData.countryCode || 'XX';
             
             // Protocol badge styling
-            const protocol = ipData.lastProtocol.toLowerCase();
-            const protocolClass = `protocol-${protocol}`;
+            const protocolClass = this.getProtocolClass(ipData.lastProtocol);
             
             // Create cells using DOM API to prevent XSS
             const addCell = (className, text) => {
@@ -3325,8 +3325,7 @@ Cache Statistics:
             const flagCode = countryData.countryCode || 'XX';
             
             // Protocol badge styling
-            const protocol = countryData.topProtocol.toLowerCase();
-            const protocolClass = `protocol-${protocol}`;
+            const protocolClass = this.getProtocolClass(countryData.topProtocol);
             
             // Get unique IP count
             const uniqueIPCount = countryData.uniqueIPs ? countryData.uniqueIPs.size : 0;

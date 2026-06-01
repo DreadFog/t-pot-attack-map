@@ -258,47 +258,24 @@ function restoreMarkerData(restoredMsg, srcLatLng, dstLatLng, originalEvent) {
 
 // Helper function to get protocol color (matches existing logic)
 function getProtocolColor(protocol) {
-    // Use the same color mapping as the dashboard for consistency
-    const colors = {
-        'IVANTI_CS': '#FF6B6B',
-        'CITRIX': '#4ECDC4',
-        'IVANTI_EPM': '#45B7D1',
-        'SAP_NETWEAVER': '#FFA07A',
-        'JENKINS': '#98D8C8',
-        'SOLARWINDS_WHD': '#F7DC6F',
-        'MOVEIT': '#BB8FCE',
-        'OTHER': '#78909C'
-    };
-    
-    // Normalize the protocol like the dashboard does
-    function normalizeProtocol(protocol) {
-        if (!protocol) return 'OTHER';
-        
-        // Check if protocol is a numeric string (port number) - convert to OTHER
-        if (/^\d+$/.test(protocol.toString())) {
-            return 'OTHER';
-        }
-        
-        // List of known protocols to check against
-        const knownProtocols = [
-            'IVANTI_CS', 'CITRIX', 'IVANTI_EPM', 'SAP_NETWEAVER', 'JENKINS', 
-            'SOLARWINDS_WHD', 'MOVEIT'
-        ];
-        
-        const protocolUpper = protocol.toUpperCase();
-        
-        // If protocol is not in the known list, use "OTHER"
-        if (!knownProtocols.includes(protocolUpper)) {
-            return 'OTHER';
-        }
-        
-        return protocolUpper;
+    if (window.TPotServiceConfig) {
+        return window.TPotServiceConfig.getProtocolColor(protocol);
     }
-    
-    const normalizedProtocol = normalizeProtocol(protocol);
-    
-    // Return color for the normalized protocol
-    return colors[normalizedProtocol] || colors['OTHER'];
+
+    return '#78909C';
+}
+
+function getProtocolClass(protocol) {
+    if (window.TPotServiceConfig) {
+        return window.TPotServiceConfig.getProtocolClass(protocol);
+    }
+
+    const fallback = String(protocol || 'OTHER')
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '_')
+        .replace(/^_+|_+$/g, '');
+    return `protocol-${fallback || 'other'}`;
 }
 
 // Use Leaflet's built-in SVG renderer to handle zoom/pan and event bubbling correctly
@@ -885,7 +862,7 @@ function createAttackerPopup(attackerData) {
         protoLabel.className = 'info-label';
         protoLabel.textContent = 'Top Protocol:';
         const protoBadge = document.createElement('span');
-        protoBadge.className = `protocol-badge protocol-${topProtocol.toLowerCase()}`;
+        protoBadge.className = `protocol-badge ${getProtocolClass(topProtocol)}`;
         protoBadge.textContent = topProtocol;
         protoRow.appendChild(protoLabel);
         protoRow.appendChild(protoBadge);
@@ -916,7 +893,7 @@ function createAttackerPopup(attackerData) {
         protoLabel.className = 'info-label';
         protoLabel.textContent = 'Top Protocol:';
         const protoBadge = document.createElement('span');
-        protoBadge.className = `protocol-badge protocol-${topProtocol.toLowerCase()}`;
+        protoBadge.className = `protocol-badge ${getProtocolClass(topProtocol)}`;
         protoBadge.textContent = topProtocol;
         protoRow.appendChild(protoLabel);
         protoRow.appendChild(protoBadge);
@@ -1036,7 +1013,7 @@ function createHoneypotPopup(honeypotData) {
             stat.className = 'protocol-stat';
             
             const badge = document.createElement('span');
-            badge.className = `protocol-badge protocol-${protocol.toLowerCase()}`;
+            badge.className = `protocol-badge ${getProtocolClass(protocol)}`;
             badge.textContent = protocol;
             
             const countSpan = document.createElement('span');

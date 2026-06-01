@@ -40,7 +40,7 @@
         <!-- Local Icons (Font Awesome) -->
         <link rel="stylesheet" href="static/fontawesome/css/all.min.css" integrity="sha384-t1nt8BQoYMLFN5p42tRAtuAAFQaCQODekUVeKKZrEnEyp4H2R0RHFz0KWpmj7i8g">
 
-        <link href="static/index.css?v=6" rel="stylesheet" integrity="sha384-m5YYUue2otbZDH9YgRY04aO0ce0el7S2KFNnfCnvPXm6X1b6y0r7FK+cHlbtr9q4"/>
+        <link href="static/index.css?v=6" rel="stylesheet" integrity="sha384-qXldE6MTbIlfUqXNb4XO+8Jb6vOUtk6p9KF46WpQH1ZacN9r3/eo/+/9/mM8ohd2"/>
     </head>
 
     <body>
@@ -129,40 +129,7 @@
                             <i class="fas fa-palette"></i>
                             <h3>Service Types</h3>
                         </div>
-                        <div class="service-legend">
-                            <div class="service-item">
-                                <div class="service-color protocol-ivanti_cs"></div>
-                                <span>IVANTI CS</span>
-                            </div>
-                            <div class="service-item">
-                                <div class="service-color protocol-citrix"></div>
-                                <span>CITRIX</span>
-                            </div>
-                            <div class="service-item">
-                                <div class="service-color protocol-ivanti_epm"></div>
-                                <span>IVANTI EPM</span>
-                            </div>
-                            <div class="service-item">
-                                <div class="service-color protocol-sap_netweaver"></div>
-                                <span>SAP NETWEAVER</span>
-                            </div>
-                            <div class="service-item">
-                                <div class="service-color protocol-jenkins"></div>
-                                <span>JENKINS</span>
-                            </div>
-                            <div class="service-item">
-                                <div class="service-color protocol-solarwinds_whd"></div>
-                                <span>SOLARWINDS WHD</span>
-                            </div>
-                            <div class="service-item">
-                                <div class="service-color protocol-moveit"></div>
-                                <span>MOVEIT</span>
-                            </div>
-                            <div class="service-item">
-                                <div class="service-color protocol-other"></div>
-                                <span>OTHER</span>
-                            </div>
-                        </div>
+                        <div class="service-legend" id="service-legend"></div>
                     </div>
                 </div>
             </div>
@@ -378,8 +345,9 @@
         </div>
 
         <script src="static/cache-bridge.js" defer integrity="sha384-mMltIbf7JoxVuM6ZaB7TYkrLmY2njkbSTL9VvYqNKtmct/C2X1/JvKr8FeYHU0I+"></script>
-        <script src="static/map.js" defer integrity="sha384-m3pfi/xkP7mEi2n2tMyZFaMUKgFH323ya1U0JH5H8xh5M/4zVoRkC8FP9qrn0zWa"></script>
-        <script src="static/dashboard.js" defer integrity="sha384-TM+wDCabtM+Ijz2vHwkDwJ37xTuTKiGxwff0p8UGUWVZ22hD6CtkozQFKhUU+6kD"></script>
+        <script src="static/service-config.js" defer></script>
+        <script src="static/map.js" defer integrity="sha384-tA1Sm0/EwuMGUli15CjAfWNM68a9FFzX6vz9+U1IzHsv/lqoTYGiTwybgsAnirX3"></script>
+        <script src="static/dashboard.js" defer integrity="sha384-/7pG7/LbX+IlBHBhXjaO21SSiLFJTPLaWd3v7tCVkXvoEHP9CZ9J37FL1+siFuIy"></script>
     </body>
 
 </html>
