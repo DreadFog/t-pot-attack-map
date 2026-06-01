@@ -1,12 +1,21 @@
 {
   "services": {
-    "IVANTI_CS": {"ports": [8443], "color": "#FF6B6B"},
-    "CITRIX": {"ports": [9443], "color": "#4ECDC4"},
+    "CISCO FMC": {"ports": [1443], "color": "#2b7a78"},
+    "CENTOS": {"ports": [2031], "color": "#00ff66"},
+    "CPANEL": {"ports": [2087], "color": "#f76f25"},
     "IVANTI_EPM": {"ports": [3008], "color": "#45B7D1"},
-    "SAP_NETWEAVER": {"ports": [50001], "color": "#FFA07A"},
+    "HPE OneView": {"ports": [3443], "color": "#01a982"},
+
     "JENKINS": {"ports": [8080], "color": "#98D8C8"},
     "SOLARWINDS_WHD": {"ports": [8081], "color": "#F7DC6F"},
     "MOVEIT": {"ports": [8082], "color": "#BB8FCE"},
+    "REACT2SHELL": {"ports": [8083], "color": "#66dbfb"},
+    "DRUPAL": {"ports": [8083], "color": "#087bc2"},
+
+    "IVANTI_CS": {"ports": [8443], "color": "#FF6B6B"},
+    "CITRIX": {"ports": [9443], "color": "#4ECDC4"},
+    "SAP_NETWEAVER": {"ports": [50001], "color": "#FFA07A"},
+    
     "OTHER": {"ports": [], "color": "#78909C"}
   }
 }
